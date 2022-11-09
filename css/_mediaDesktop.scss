@@ -1,0 +1,59 @@
+@media screen and (min-width:1024px) {
+    /* general */
+      .float-wpp{
+        width: 4em;
+        height: 4em;
+    }
+
+    /* footer schedule and social display */
+    #footer div:first-child, #footer div:nth-child(2){
+        max-width: 600px;
+        margin: auto;
+    }
+
+    /* INDEX ojalBoton multimedia container display */
+    #index-main .main-container{
+        .grid-container{
+            margin-left: auto;
+        }
+    }
+
+    /* CATALOGO */
+    #products-container{
+        width: 95%;
+        grid-template-columns: repeat(3, 1fr);     
+    }
+
+    /* NOSOTROS */
+    /* dates flex */
+    .first-date-flex, .second-date-flex{
+        display: flex;
+        gap: 10px;
+    }
+    .first-date-flex{
+        flex-direction: row-reverse;
+        justify-content: space-around;
+    }
+    .second-date-flex{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    /* CONTACTO */
+    #contact-social .container{
+        width: 30vw;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    /* CATALOGO */
+    #products-container{
+        width: 90%;
+        grid-template-columns: repeat(4, 1fr);     
+    }
+
+    /* CONTACTO */
+    #contact-social .container{
+        width: 18vw;
+    }
+}

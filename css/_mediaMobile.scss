@@ -1,0 +1,8 @@
+@media screen and (min-width:100px) and (max-width: 767px) {
+    /* footer */
+    .map-container{display: none;}
+    /* general pages */
+    .track-container{display: none;}
+    /* catalogo */
+    .filters-container p:first-child, .filters-container p:nth-child(3){display: none;}
+}

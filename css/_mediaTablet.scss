@@ -1,0 +1,90 @@
+@media screen and (min-width: 768px){ /* display básico del index and footer para pantallas + grandes */
+    /* header nav and icons */
+    .icon-container{
+        display: flex;
+        flex-basis: 100% !important; /* pongo este !important para sobrescribir los valores de bootstrap, sino me queda mal el header */
+        justify-content: space-around;
+        width: 8vw;
+    }
+    .navbar-nav{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+    
+    /* Footer grid and map container */
+    footer{
+        @include grid-template(35% 15% 10% 15% 25%, 45% 45% 10%, 0px, 0px);
+        grid-template-areas:
+        "Schedule Schedule . Maps Maps"
+        "Social Social . Maps Maps"
+        "Copyright Copyright Copyright Copyright Copyright";
+        div{
+            &:first-child{grid-area: Schedule;}
+            &:nth-child(2){grid-area: Social;}
+            &:nth-child(3){grid-area: Maps;}
+            &:nth-child(4){grid-area: Copyright; align-self: center;}
+        }
+    }
+    .map-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    /* INDEX */
+    /* carousel and ojalBoton: grids-containers */
+    #index-main .main-container{
+        @include grid-template(0.4fr 1fr 1fr 0.4fr, auto, 1rem, 1rem);
+        justify-content: center;
+        grid-template-areas: ". carousel carousel ." ". multimedia texts .";
+        div{
+            &:first-child{grid-area: carousel;}
+            &:nth-child(2){grid-area: multimedia;}
+            &:last-child{grid-area: texts;}
+        }
+    }
+
+    /* CATALOGO */
+    .filters-container p:nth-child(4){display: none;}
+
+    #products-container{
+        width: 80%;
+        gap: 15px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);   
+    }
+
+    .track-container a:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    /* OJAL Y BOTON */
+    #ojal-main .second-carousel-flex, #ojal-main .third-carousel-flex{
+        display: flex;
+        max-width: 1200px;
+        margin: 25px auto;
+    }
+    #ojal-main .second-carousel-flex{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    #ojal-main .third-carousel-flex{
+        flex-direction: row-reverse;
+        justify-content: space-around;
+    }
+    #ojal-main .button-container{margin:10px;}
+
+    /* NOSOTROS */
+    /* grid */
+    .history-grid{
+        grid-template-columns: 0.1fr 1fr;
+    }
+
+    /* CONTACTO */
+    #contact-social .container{
+        width: 40vw;
+    }
+}
+

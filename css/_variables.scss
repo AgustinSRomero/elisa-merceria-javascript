@@ -1,0 +1,25 @@
+/* Cargo las fuentes */
+@font-face {
+    font-family: 'perpetuaBOLD';
+    src: url('../assets/fonts/perpetua/Perpetua_Bold_font.ttf');
+}
+@font-face {
+    font-family: 'perpetuaREGULAR';
+    src: url('../assets/fonts/perpetuaSgdaVersion/Perpetua.otf');
+}
+@font-face {
+    font-family: 'perpetuaTitlingMTBOLD';
+    src: url('../assets/fonts/perpetua-titling-mt/pertibd.ttf');
+}
+
+/* Mixins */
+@mixin grid-template($columns, $rows, $column-gap, $row-gap){
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+    column-gap: $column-gap;
+    row-gap: $row-gap;
+}
+
+/* Maps */
+$palette: ("header-footer": #918367, "body": #EFEBE4, "letter-beige": #FFF7E8, "letter-dark-blue": #596f91, "letter-light-blue": #B4C5DE, "button-brown": #918367d2, "dropdown-items": #5d5340);

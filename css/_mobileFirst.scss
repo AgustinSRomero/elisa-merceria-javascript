@@ -1,0 +1,491 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+a{text-decoration: none;}
+ul{list-style-type: none;}
+body{background-color: map-get($map: $palette, $key: "body");}
+
+h1{font-size: 2.5em;}
+h2{font-size: 1.2em;}
+h3{font-size: 1.8em;}
+h4{font-size: 1.6em;}
+h5, li{font-size: 1.4em;}
+label{font-size: 1.3em;}
+h6, button, input{font-size: 1.2em;}
+p{font-size: 1.4em;}
+
+h1 , h2{
+    font-family: 'perpetuaTitlingMTBOLD';
+}
+h3, h4{
+    font-family: 'perpetua-titling-mt';
+}
+h5, h6, p, li, button, input, label, textarea{
+    font-family: 'perpetuaREGULAR';
+}
+
+.float-wpp{
+    position: fixed;
+    bottom: 1em; right: 1em;
+    height: 3em;
+    width: 3em;
+    z-index: 2;
+}
+
+.button{
+    background-color: map-get($map: $palette, $key: "button-brown");
+    border: 1px solid map-get($map: $palette, $key: "header-footer");
+    border-radius: 6px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    color: map-get($map: $palette, $key: "letter-beige");
+    width: 6.5em;
+    height: auto;
+
+    &:hover{
+        background-color: map-get($map: $palette, $key: "letter-light-blue");
+        border-color: map-get($map: $palette, $key: "letter-dark-blue");
+        color: map-get($map: $palette, $key: "letter-dark-blue");
+    }
+}
+
+.bigger-button{
+    @extend .button;
+    width: 8em;
+    height: 2em;
+}
+
+/* grid general pages */
+.main-container{
+    @include grid-template(5% 90% 5%, auto, 0px, 0px);
+    justify-content: center;
+    justify-items: center;
+    align-items: center; 
+    margin-top: 10px;
+}
+
+/* HEADER */
+.navbar{ /* sobreescribo el padding de bootstrap */
+    padding: 5px;
+}
+/* transitions logo, nav y subitems */
+header{
+    background-color: map-get($map: $palette, $key: "header-footer");
+    a{transition: 0.3s ease;}
+}
+
+.navbar-toggler{ /* burger menu */
+    border: 0px;
+    color: map-get($map: $palette, $key: "header-footer");
+}
+.navbar-brand a, h5{ /* logo and sublogo */
+    text-align: center;
+    color: map-get($map: $palette, $key: "letter-beige");
+}
+.navbar-brand a{ /* logo */
+    letter-spacing: 3px;
+    text-shadow: 0rem 0.125rem 0.188rem #00000054;
+    &:hover{
+        color: map-get($map: $palette, $key: "letter-light-blue");
+        text-shadow: 0.1rem 0.2rem 0.2rem #0f0f0fb4;
+    }
+}
+
+.nav-link{ /* nav links style */
+    color: map-get($map: $palette, $key: "letter-beige");
+    letter-spacing: 1.5px;
+    &:hover{
+        color: map-get($map: $palette, $key: "letter-light-blue");
+    }
+}
+
+.dropdown-item{ /* nav catalogo submenu style */
+    color: map-get($map: $palette, $key: "dropdown-items");
+    &:hover{
+        background-color: map-get($map: $palette, $key: "letter-light-blue");
+        cursor: pointer;
+    }
+}
+
+.icon-container-all{
+    display: flex;
+    justify-content: space-evenly;
+}
+.icon-container{
+    width: 15vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    img{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+/*CARRITO DE COMPRAS (MODAL)*/
+#color{
+    background-color: map-get($map: $palette, $key: "header-footer");
+    border-color:  map-get($map: $palette, $key: "header-footer");
+    box-shadow: none;
+}
+.modal-body, .modal-header, .modal-footer{
+    background-color: map-get($map: $palette, $key: "letter-beige");
+    color: map-get($map: $palette, $key: "letter-dark-blue");
+}
+
+.product-carrito-container{
+    @include grid-template(52% 40% 8%, auto, auto, auto);
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    gap: 1rem;
+}
+.input-quantity{
+    background-color: map-get($map: $palette, $key: "body");
+    border: none;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 3.5rem;
+}
+
+
+.img-carrito{
+    width: 70%;
+    height: 70%;
+    padding: 20px;
+}
+.carrito-notification{
+    background-color: map-get($map: $palette, $key: "letter-dark-blue");
+    color: map-get($map: $palette, $key: "letter-beige");
+    border-radius: 100%;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* FOOTER */
+footer{
+    background-color: map-get($map: $palette, $key: "header-footer");
+    padding: 30px 2px 15px 2px;
+    margin-top: 15px;
+    div{
+        h2, p{
+            color: map-get($map: $palette, $key: "letter-beige");
+        }
+        div{
+            a{
+                margin-left: 10px;
+            }
+        }
+        .copyright{
+            font-size: 1em;
+            text-align: center;
+            margin-bottom: 0;
+            padding-top: 10px;
+        }
+    }
+}
+
+/* INDEX */
+/* main grid */
+#carouselExampleFade{
+    width: 90vw;
+    margin: 1.1em auto;
+    max-width: 1300px;
+}
+#index-main .main-container{
+    grid-template-areas: ". carousel ." ". multimedia ." ". texts .";
+    div{
+        &:first-child{grid-area: carousel;}
+        &:nth-child(2){grid-area: multimedia;}
+        &:nth-child(3){grid-area: texts;} 
+    }
+
+    .grid-container{ /* grid multimedia ojalBoton */
+        @include grid-template(1fr 1fr, auto auto, 8px, 8px);
+        justify-content: center;
+        align-items: center;
+        max-width: 650px;
+        margin: 15px auto;
+        
+        grid-template-areas: "video video" "fimg simg";
+        .grid-video-area{grid-area: video; width: 100%;}
+        .grid-firstImg-area{grid-area: fimg; width: 100%;}
+        .grid-secondImg-area{grid-area: simg; width: 100%;}    
+    }
+
+    .ojalboton-container{
+        padding: 5px 10px;
+        margin: 10px auto;
+        max-width: 500px;
+        h3, p{/* style ojalBoton texts */
+            text-align: center;
+            color: map-get($map: $palette, $key: "letter-dark-blue");
+        }
+        h3{  
+            font-weight: bold;
+        }
+        
+        .button-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+    }
+}
+
+/* CATALOGO */
+/* main catalogo grid */
+#catalogo-main .main-container{grid-template-areas: "track track track" ". filters ." ". products ." ". pagination .";}
+.main-container .track-container{grid-area: track; justify-self: flex-start; margin: 10px 15px; transition: 0.3s;}
+.main-container .filters-container{grid-area: filters;}
+.main-container #products-container{grid-area: products;}
+.main-container .pagination-container{grid-area: pagination;}
+
+#catalogo-main p, #catalogo-main a{color: map-get($map: $palette, $key: "letter-dark-blue");}
+
+/* filter style and flexbox */
+.filters-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 8px 0px;
+    border-bottom: 1px solid map-get($map: $palette, $key: "letter-dark-blue");
+}
+.filters-container p{margin: 5px 0px;}
+
+/* products style and hover */
+.box-producto{
+    text-align: center;
+    padding: 30px;
+    border: solid 0.07rem #918367;
+    border-radius: 5%;
+    box-shadow: 1px 1px 3px #0000006e;
+    margin: 15px auto;
+    transition: 0.3s;
+}
+.box-producto:hover{
+    background-color: #b4c5dec0;
+    box-shadow: 1.5px 1.5px 3px #000000b1;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+#products-container p{margin: 4px 0px;}
+/* buttons boxmodel */
+.pagination-container{margin-top: 10px;}
+
+/* Buttons */
+.button-catalogo{
+    @extend .button;
+    color: map-get($map: $palette, $key: "letter-beige");
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    padding: 1px;
+    margin: 3px 1px;
+}
+
+/* OJAL Y BOTON */
+/* main grid */
+#ojal-main .main-container{
+    row-gap: 15px;
+    grid-template-areas: "track track track" ". first-carousel ." ". second-carousel ." ". third-carousel ." ". button .";
+}
+#ojal-main .main-container section:first-child{grid-area: track;}
+#ojal-main .main-container section:nth-child(2){grid-area: first-carousel;}
+#ojal-main .main-container section:nth-child(3){grid-area: second-carousel;}
+#ojal-main .main-container section:nth-child(4){grid-area: third-carousel;}
+#ojal-main .main-container section:nth-child(5){grid-area: button;}
+
+#ojal-main section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ojal-main h4,#ojal-main h5, #ojal-main p, #ojal-main a{
+    color: map-get($map: $palette, $key: "letter-dark-blue");
+    text-align: center;
+}
+#ojal-main h4,#ojal-main h5{
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* NOSOTROS */
+/* main grid */
+#us-main .main-container{
+    grid-template-areas: "track track track" ". title ." ". history ." ". subtitle .";
+}
+#us-main .main-container div:first-child{grid-area: track;}
+#us-main .main-container div:nth-child(2){grid-area: title;}
+#us-main .main-container div:nth-child(3){grid-area: history;}
+#us-main .main-container div:nth-child(4){grid-area: subtitle;}
+
+/* history grid */
+.history-grid{
+    @include grid-template(0.3fr 1fr, auto, 20px, 30px);
+    justify-content: center;
+    
+    grid-template-areas: "first-date first-text" "second-date second-text" "third-date third-text";
+}
+#us-main .history-grid div:first-child{grid-area: first-date;}
+#us-main .history-grid div:nth-child(2){grid-area: second-date;}
+#us-main .history-grid div:nth-child(3){grid-area: third-date;}
+#us-main .history-grid div:nth-child(4){grid-area: first-text;}
+#us-main .history-grid div:nth-child(5){grid-area: second-text;}
+#us-main .history-grid div:nth-child(6){grid-area: third-text;}
+
+/* flex history and size img */
+.first-date-flex, .second-date-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 12px;
+}
+
+/* styles */
+.us-img{
+    width: 100%;
+    max-width: 460px;
+}
+#us-main .container{
+    max-width: 460px;
+    margin: auto;
+}
+#us-main .p-container{
+    max-width: 1100px;
+    margin: 15px auto;
+}
+
+.main-container, .main-container a, .main-container h5{color: map-get($map: $palette, $key: "letter-dark-blue")}
+.main-container h4, .main-container h5{
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.us-titles{margin: 40px auto;}
+
+.first-date-flex p, .second-date-flex p{
+    max-width: 430px;
+    margin: 0px auto;
+}
+
+/* CONTACTO */
+/* main grid */
+#contact-main .main-container{
+    justify-content: center;
+    grid-template-areas: "track track track" ". title ." ". links-social ." ". form .";
+}
+
+#contact-main .main-container section:first-child{grid-area: track; justify-self: flex-start;}
+#contact-main .main-container section:nth-child(2){grid-area: title;}
+#contact-main .main-container section:nth-child(3){grid-area: links-social; justify-self: center;}
+#contact-main .main-container section:nth-child(4){grid-area: form;}
+
+/* form grid */
+#contact-form .grid-container{
+    max-width: 750px;
+    margin: 15px auto;
+    display: grid;
+    grid-template-columns: 0.8fr 0.8fr 1fr 0.5fr 0.5fr 1fr;
+    gap: 15px;
+    justify-content: center;
+
+    grid-template-areas: 
+        "name name name-field name-field name-field name-field" 
+        "email email email-field email-field email-field email-field" 
+        " tipo tipo tipo1 tipo1 tipo2 tipo2" 
+        "tel tel tel-field tel-field tel-field tel-field" 
+        "consulta consulta consulta-text consulta-text consulta-text consulta-text" 
+        ". . . . clean clean" 
+        "title-robot title-robot title-robot . . ." 
+        "robot-check robot-check robot-check . send send"
+    ;
+}
+#contact-form .grid-container label:first-of-type{grid-area: name;}
+#contact-form .grid-container label:nth-of-type(2){grid-area: email;}
+#contact-form .grid-container label:nth-of-type(3){grid-area: tipo;}
+#contact-form .grid-container label:nth-of-type(4){grid-area: tel;}
+#contact-form .grid-container label:nth-of-type(5){grid-area: consulta;}
+#contact-form .grid-container input:nth-of-type(1){grid-area: name-field;}
+#contact-form .grid-container input:nth-of-type(2){grid-area: email-field;}
+#contact-form .grid-container input:nth-of-type(3){grid-area: tel-field;}
+#contact-form .grid-container input:nth-of-type(4){grid-area: clean; justify-self: center;}
+#contact-form .grid-container input:nth-of-type(5){grid-area: send;}
+#contact-form .grid-container div:nth-of-type(1){grid-area: tipo1; justify-self: center;}
+#contact-form .grid-container div:nth-of-type(2){grid-area: tipo2;}
+#contact-form .grid-container textarea:first-of-type{grid-area: consulta-text;}
+#contact-form .grid-container h6:first-of-type{grid-area: title-robot;}
+#contact-form .grid-container fieldset:first-of-type{grid-area: robot-check; justify-self: center;}
+
+/* flexbox social links */
+.social-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#contact-social .container{
+    display: flex;
+    max-width: 50vw;
+    margin: 1.5em auto;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* styles */
+/* style buttons send, clean and robot */
+#contact-form input:nth-of-type(4), #contact-form input:nth-of-type(5),#contact-form fieldset{
+    background-color: map-get($map: $palette, $key: "button-brown");
+    border: 1px solid map-get($map: $palette, $key: "header-footer");
+    border-radius: 6px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+    color: map-get($map: $palette, $key: "letter-beige");
+}
+#contact-form input:nth-of-type(5){width: 4em;}
+
+#contact-form h6{text-align: center;}
+
+#contact-form input:hover{
+    cursor: pointer;
+    background-color: #596f91;
+}
+
+/* Style text input y textarea */
+#contact-form input:not(.not-min-width), #contact-form textarea{
+    background-color: #b0c0daa0;
+    border: 1px solid map-get($map: $palette, $key: "letter-light-blue");
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* OFERTAS */
+/* main grid */
+#ofertas-main .main-container{
+    grid-template-columns: 0.3fr 1fr 0.3fr;
+    height: 90vh;
+    justify-items: center;
+    grid-template-areas: "track track track" ". title ." ". subtitle .";
+}
+#ofertas-main .main-container section:first-of-type{grid-area: track; justify-self: flex-start; align-self: flex-start;}
+#ofertas-main .main-container h3:first-of-type{grid-area: title;}
+#ofertas-main .main-container p:first-of-type{grid-area: subtitle;}
+
+/* basic style */
+#ofertas-main a{transition: 0.3s;}
+#ofertas-main a:hover{
+    color: map-get($map: $palette, $key: "dropdown-items");
+    text-decoration: underline;
+    cursor: pointer;
+}
