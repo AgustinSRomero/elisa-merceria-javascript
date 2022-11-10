@@ -215,7 +215,8 @@ header a {
   border: none;
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
-  width: 3.5rem;
+  width: 2.5rem;
+  height: 2rem;
 }
 
 .img-carrito {
@@ -228,6 +229,12 @@ header a {
   background-color: #596f91;
   color: #FFF7E8;
   border-radius: 100%;
+  font-size: 0.8em;
+}
+
+.carrito-notification p {
+  font-size: 1.1rem;
+  margin: 2px;
 }
 
 .modal-footer {
@@ -719,6 +726,15 @@ footer div .copyright {
   color: #5d5340;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* COMPRA */
+#compra-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #596f91;
 }
 
 /* importo las media queries */

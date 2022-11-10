@@ -151,7 +151,8 @@ header{
     border: none;
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
     text-align: center;
-    width: 3.5rem;
+    width: 2.5rem;
+    height: 2rem;
 }
 
 
@@ -164,8 +165,12 @@ header{
     background-color: map-get($map: $palette, $key: "letter-dark-blue");
     color: map-get($map: $palette, $key: "letter-beige");
     border-radius: 100%;
+    font-size: 0.8em;
 }
-
+.carrito-notification p{
+    font-size: 1.1rem;
+    margin: 2px;
+}
 .modal-footer{
     display: flex;
     justify-content: space-between;
@@ -488,4 +493,13 @@ footer{
     color: map-get($map: $palette, $key: "dropdown-items");
     text-decoration: underline;
     cursor: pointer;
+}
+
+/* COMPRA */
+#compra-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: map-get($map: $palette, $key: "letter-dark-blue")
 }
