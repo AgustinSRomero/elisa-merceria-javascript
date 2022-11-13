@@ -137,12 +137,32 @@
                 </h6>
             </div>
             <!--Barra de catalogo con la información y la posibilidad de filtrar y/o ordenar-->
-            <div class="filters-container">
-                <p>
-                    <img src="../assets/icons/filter-blue.png" alt="filtros" width="16px" height="20px">
-                    Filtrar por
-                </p>
-                <p></p>
+            <div class="filters-container">   
+                <div class="dropdown  container-filter-for">
+                    <button class="dropdown" id="filters-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../assets/icons/filter-blue.png" alt="filtros" width="16px" height="20px">
+                        Filtrar por
+                    </button>
+                    <ul class="dropdown-menu  filters-flex-style" id="dropwdown-filters">
+                        <li>
+                            <input type="checkbox" id="hilos" class="dropdown-item checkbox-filter" value="Hilos">
+                            <label for="hilos">Hilos</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="cintas" class="dropdown-item checkbox-filter" value="Cintas">
+                            <label for="cintas">Cintas</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="agujas" class="dropdown-item checkbox-filter" value="Agujas">
+                            <label for="agujas">Agujas</label>
+                        </li>
+                        <li class="button-filter-container">
+                            <button id="apply-filters" type="button" class="dropdown-item button-filter">Aplicar</button>
+                            <button id="clean-filters" type="button" class="dropdown-item button-filter">Limpiar</button>
+                        </li>
+                    </ul>
+                </div>
+                <p id="cantidad-productos"></p>
                 <p>Ordenar por &blacktriangledown;</p>
                 <p>
                    Filtros

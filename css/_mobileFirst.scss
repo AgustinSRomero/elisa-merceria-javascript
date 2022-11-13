@@ -265,7 +265,48 @@ footer{
     margin: 8px 0px;
     border-bottom: 1px solid map-get($map: $palette, $key: "letter-dark-blue");
 }
-.filters-container p{margin: 5px 0px;}
+.filters-container p, .filters-container div{margin: 5px 0px;}
+.container-filter-for button{
+    background-color: map-get($map: $palette, $key: "body");
+    color: map-get($map: $palette, $key: "letter-dark-blue");
+    border: 0px;
+    box-shadow: none;
+}
+.filters-flex-style, .filters-flex-style li{
+    background-color: map-get($map: $palette, $key: "body");
+    color: map-get($map: $palette, $key: "letter-dark-blue");
+}
+.filters-flex-style li{
+    @include grid-template(30% 70%, auto, auto, auto);
+    align-items: center;
+    font-size: 1rem;
+}
+.filters-flex-style .button-filter-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 3px 5px;
+    height: 80%;
+
+    button{
+        background-color: map-get($map: $palette, $key: "button-brown");
+        border: 1px solid map-get($map: $palette, $key: "header-footer");
+        border-radius: 3px;
+        box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+        color: map-get($map: $palette, $key: "letter-beige");
+        font-size: 1rem;
+        margin: 3px 5px;
+        
+        &:hover{
+            background-color: map-get($map: $palette, $key: "letter-light-blue");
+            border-color: map-get($map: $palette, $key: "letter-dark-blue");
+            color: map-get($map: $palette, $key: "letter-dark-blue");
+        }
+    }
+}
+
+
 
 /* products style and hover */
 .box-producto{

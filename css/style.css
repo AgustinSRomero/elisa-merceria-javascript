@@ -362,8 +362,54 @@ footer div .copyright {
   border-bottom: 1px solid #596f91;
 }
 
-.filters-container p {
+.filters-container p, .filters-container div {
   margin: 5px 0px;
+}
+
+.container-filter-for button {
+  background-color: #EFEBE4;
+  color: #596f91;
+  border: 0px;
+  box-shadow: none;
+}
+
+.filters-flex-style, .filters-flex-style li {
+  background-color: #EFEBE4;
+  color: #596f91;
+}
+
+.filters-flex-style li {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: auto;
+  -moz-column-gap: auto;
+       column-gap: auto;
+  row-gap: auto;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.filters-flex-style .button-filter-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 3px 5px;
+  height: 80%;
+}
+.filters-flex-style .button-filter-container button {
+  background-color: rgba(145, 131, 103, 0.8235294118);
+  border: 1px solid #918367;
+  border-radius: 3px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+  color: #FFF7E8;
+  font-size: 1rem;
+  margin: 3px 5px;
+}
+.filters-flex-style .button-filter-container button:hover {
+  background-color: #B4C5DE;
+  border-color: #596f91;
+  color: #596f91;
 }
 
 /* products style and hover */

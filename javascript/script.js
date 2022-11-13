@@ -31,9 +31,13 @@ class producto {
     }
 }
 
+/* Creo un carrito vacío */
 let carrito = []
 
+/* Declaro constantes del dom para utilizarlas */
 const contenedorProductos = document.querySelector('#products-container')
+
+const cantidadProductos = document.querySelector("#cantidad-productos")
 
 const carritoNotificacion = document.querySelector('#carrito-notification')
 
@@ -43,28 +47,45 @@ const precioTotal = document.querySelector('#precio-total')
 
 const finalizarCompra = document.querySelector('#finalizar-compra')
 
+const aplicarFiltros = document.querySelector('#apply-filters')
+const limpiarFiltros = document.querySelector("#clean-filters")
+const hilos = document.getElementById("hilos")
+const cintas = document.getElementById("cintas")
+const agujas = document.getElementById("agujas")
+
+
 // Me fijo si hay un carrito guardado en el local storage y lo renderizo
 document.addEventListener('DOMContentLoaded', () => {
     carrito = JSON.parse(localStorage.getItem('carrito')) || []
     mostrarCarrito()
 })
 
-// Renderizo todos los productos de la tienda
-productos.forEach((prod) => {
-    const {id, nombre, precio, stock, img, altImg} = prod
-    const div = document.createElement('div')
-    div.classList.add('box-producto')
+// funcion para renderizar productos
+function renderizarProductos(products){
+    contenedorProductos.innerHTML = ""    
 
-    div.innerHTML = `
-        <img src="${img}" alt="${altImg}">
-        <p>${nombre}</p> 
-        <p>$${precio}</p>
-        <input id="quantity${id}" class="input-quantity" type="number" value="1" min="1" max="${stock}">
-        <button onclick="agregarProducto(${id}, ${precio}, cantidadProducto(${id}))" class="button-catalogo">Añadir al Carrito</button>
-    `
-    //En el boton tengo el evento onclick que activa la funcion que agrega al carrito con dos parametros, producto id y cantidad producto
-    contenedorProductos.appendChild(div)
-})
+    products.forEach((prod) => {
+        const {id, nombre, precio, stock, img, altImg} = prod
+        const div = document.createElement('div')
+        div.classList.add('box-producto')
+
+        div.innerHTML = `
+            <img src="${img}" alt="${altImg}">
+            <p>${nombre}</p> 
+            <p>$${precio}</p>
+            <input id="quantity${id}" class="input-quantity" type="number" value="1" min="1" max="${stock}">
+            <button onclick="agregarProducto(${id}, ${precio}, cantidadProducto(${id}))" class="button-catalogo">Añadir al Carrito</button>
+        `
+        //En el boton tengo el evento onclick que activa la funcion que agrega al carrito con dos parametros, producto id y cantidad producto
+        contenedorProductos.appendChild(div)
+
+        
+    })
+    cantidadProductos.innerHTML = products.length + " productos"
+}
+
+// Renderizo todos los productos de la tienda
+renderizarProductos(productos)
 
 //Funcion para obtener el valor de cantidad que ingreso el usuario
 function cantidadProducto(id){
@@ -82,9 +103,8 @@ function agregarProducto(id, precio, cantidad){
     if(validar){
         const prodCarrito = carrito.find((prod) => prod.id === id)
         prodCarrito.cantidad = prodCarrito.cantidad + cantidad
-        //Calculo precio cuando tengo productos en el carrito
+        //Calculo el precio cuando tengo el producto en el carrito
         prodCarrito.precio = prodCarrito.precio + (precio * cantidad)
-        
     }else{
         //Seteo cantidad y precio
         item.cantidad = cantidad
@@ -92,7 +112,6 @@ function agregarProducto(id, precio, cantidad){
         
         carrito.push(item)
     }
-    
     mostrarCarrito() 
 }
 
@@ -173,3 +192,44 @@ finalizarCompra.addEventListener('click', () => {
         })
     }
 })
+
+//Funcion para filtrar los productos dependiendo de que checkbox marque el usuario
+aplicarFiltros.addEventListener('click', () => {
+    let productosFiltrados = []
+
+    if(!hilos.checked && (!cintas.checked && !agujas.checked)){
+        productosFiltrados = productos
+    }else{
+        if (hilos.checked) {
+            let filtro = productos.filter((prod) => prod.categoria === "hilos")
+            for (const prod of filtro) {
+                productosFiltrados.push(prod)
+            }
+        }
+
+        if(cintas.checked){
+            let filtro = productos.filter((prod) => prod.categoria === "cintas")
+            for (const prod of filtro) {
+                productosFiltrados.push(prod)
+            }
+        }
+
+        if(agujas.checked){
+            let filtro = productos.filter((prod) => prod.categoria === "agujas")
+            for (const prod of filtro) {
+                productosFiltrados.push(prod)
+            }
+        }
+    }
+
+    renderizarProductos(productosFiltrados)
+})
+
+limpiarFiltros.addEventListener('click', () => {
+    hilos.checked = false
+    cintas.checked = false
+    agujas.checked = false
+    
+    renderizarProductos(productos)
+})
+
