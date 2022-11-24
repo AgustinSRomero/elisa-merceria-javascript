@@ -1,22 +1,3 @@
-const productos = [
-    {id: 1, categoria: "hilos", nombre: "Bobinas", precio: 100, stock: 300, cantidad: 1, tipo: "unidad", img:"../assets/catalogo1.jpg", altImg:"bobinas"},
-    {id: 2, categoria: "cierres", nombre: "Cierre reforzado", precio: 150, stock: 100, cantidad: 1, tipo: "unidad", img:"../assets/catalogo2.jpg", altImg:"cierres reforzados"},
-    {id: 3, categoria: "cintas", nombre: "Bies angosto", precio: 180, stock: 25, cantidad: 1, tipo: "metro", img:"../assets/catalogo3.jpg", altImg:"bies angosto"},
-    {id: 4, categoria: "cintas", nombre: "Cinta mochila", precio: 220, stock: 10, cantidad: 1, tipo: "metro", img:"../assets/catalogo4.jpg", altImg:"cinta mochila ancha"},
-    {id: 5, categoria: "hilos", nombre: "Hilo encerado", precio: 300, stock: 40, cantidad: 1, tipo: "unidad", img:"../assets/catalogo5.jpg", altImg:"hilo encerado"},
-    {id: 6, categoria: "cierres", nombre: "Cierre metal", precio: 210, stock: 150, cantidad: 1, tipo: "unidad", img:"../assets/catalogo6.jpg", altImg:"cierre metal"},
-    {id: 7, categoria: "agujas", nombre: "Aguja plástica", precio: 25, stock: 25, cantidad: 1, tipo: "unidad", img:"../assets/catalogo7.jpg", altImg:"agujas plásticas"},
-    {id: 8, categoria: "pegamentos", nombre: "Pegamil", precio: 380, stock: 10, cantidad: 1, tipo: "unidad", img:"../assets/catalogo8.jpg", altImg:"pegamento pegamil"},
-    {id: 9, categoria: "hilos", nombre: "Cono de nylon", precio: 500, stock: 50, cantidad: 1, tipo: "unidad", img:"../assets/catalogo9.jpg", altImg:"cono de nylon"},
-    {id: 10, categoria: "manualidades", nombre: "Pompones", precio: 250, stock: 15, cantidad: 1, tipo: "metro", img:"../assets/catalogo10.jpg", altImg:"cinta de pompones"},
-    {id: 11, categoria: "hilos", nombre: "Cono MH", precio: 400, stock: 160, cantidad: 1, tipo: "unidad", img:"../assets/catalogo11.jpg", altImg:"conos hilo polyester mh"},
-    {id: 12, categoria: "puntilla", nombre: "Puntilla crudo", precio: 320, stock: 10, cantidad: 1, tipo: "metro", img:"../assets/catalogo12.jpg", altImg:"puntilla color crudo"},
-    {id: 13, categoria: "cintas", nombre: "Cinta raso motivo", precio: 110, stock: 40, cantidad: 1, tipo: "metro", img:"../assets/catalogo13.jpg", altImg:"cinta razo con lunares"},
-    {id: 14, categoria: "alfileres", nombre: "Rueda alfileres", precio: 160, stock: 12, cantidad: 1, tipo: "unidad", img:"../assets/catalogo14.jpg", altImg:"rueda de alfileres"},
-    {id: 15, categoria: "agujas", nombre: "Enhebradores", precio: 15, stock: 30, cantidad: 1, tipo: "unidad", img:"../assets/catalogo15.jpg", altImg:"enhebradores plásticos y chapa"},
-    {id: 16, categoria: "cintas", nombre: "Cinta raso arcoiris", precio: 100, stock: 25, cantidad: 1, tipo: "metro", img:"../assets/catalogo16.jpg", altImg:"cinta raso de arcoiris"},
-]
-
 class producto {
     constructor(id, categoria, nombre, precio, stock, tipo, img, altImg){
         this.id = id
@@ -85,7 +66,12 @@ function renderizarProductos(products){
 }
 
 // Renderizo todos los productos de la tienda
-renderizarProductos(productos)
+function traerProductos(){
+    fetch('../javascript/productos.json')
+        .then(response => response.json())
+        .then(arrayProductos => renderizarProductos(arrayProductos))
+}
+traerProductos()
 
 //Funcion para obtener el valor de cantidad que ingreso el usuario
 function cantidadProducto(id){
@@ -97,22 +83,27 @@ function cantidadProducto(id){
 
 //Funcion que agrega los items al carrito
 function agregarProducto(id, precio, cantidad){
-    const item = productos.find((producto) => producto.id === id)
-    const validar = carrito.some((prod) => prod.id === id)
+    fetch('../javascript/productos.json')
+        .then(response => response.json())
+        .then((arrayProductos) => {
+            const item = arrayProductos.find((producto) => producto.id === id)
+            const validar = carrito.some((prod) => prod.id === id)
 
-    if(validar){
-        const prodCarrito = carrito.find((prod) => prod.id === id)
-        prodCarrito.cantidad = prodCarrito.cantidad + cantidad
-        //Calculo el precio cuando tengo el producto en el carrito
-        prodCarrito.precio = prodCarrito.precio + (precio * cantidad)
-    }else{
-        //Seteo cantidad y precio
-        item.cantidad = cantidad
-        item.precio = precio * cantidad
-        
-        carrito.push(item)
-    }
-    mostrarCarrito() 
+            if(validar){
+                const prodCarrito = carrito.find((prod) => prod.id === id)
+                prodCarrito.cantidad = prodCarrito.cantidad + cantidad
+                //Calculo el precio cuando tengo el producto en el carrito
+                prodCarrito.precio = prodCarrito.precio + (precio * cantidad)
+            }else{
+                //Seteo cantidad y precio
+                item.cantidad = cantidad
+                item.precio = precio * cantidad
+            
+            carrito.push(item)
+        }
+
+        mostrarCarrito() 
+    })
 }
 
 // Funcion que renderiza el carrito
@@ -195,41 +186,47 @@ finalizarCompra.addEventListener('click', () => {
 
 //Funcion para filtrar los productos dependiendo de que checkbox marque el usuario
 aplicarFiltros.addEventListener('click', () => {
-    let productosFiltrados = []
+    fetch('../javascript/productos.json')
+        .then(response => response.json())
+        .then((arrayProductos) => {
+            let productosFiltrados = []
 
-    if(!hilos.checked && (!cintas.checked && !agujas.checked)){
-        productosFiltrados = productos
-    }else{
-        if (hilos.checked) {
-            let filtro = productos.filter((prod) => prod.categoria === "hilos")
-            for (const prod of filtro) {
-                productosFiltrados.push(prod)
+            if(!hilos.checked && (!cintas.checked && !agujas.checked)){
+                productosFiltrados = arrayProductos
+            }else{
+                if (hilos.checked) {
+                    let filtro = arrayProductos.filter((prod) => prod.categoria === "hilos")
+                    for (const prod of filtro) {
+                        productosFiltrados.push(prod)
+                    }
+                }
+        
+                if(cintas.checked){
+                    let filtro = arrayProductos.filter((prod) => prod.categoria === "cintas")
+                    for (const prod of filtro) {
+                        productosFiltrados.push(prod)
+                    }
+                }
+        
+                if(agujas.checked){
+                    let filtro = arrayProductos.filter((prod) => prod.categoria === "agujas")
+                    for (const prod of filtro) {
+                        productosFiltrados.push(prod)
+                    }
+                }
             }
-        }
-
-        if(cintas.checked){
-            let filtro = productos.filter((prod) => prod.categoria === "cintas")
-            for (const prod of filtro) {
-                productosFiltrados.push(prod)
-            }
-        }
-
-        if(agujas.checked){
-            let filtro = productos.filter((prod) => prod.categoria === "agujas")
-            for (const prod of filtro) {
-                productosFiltrados.push(prod)
-            }
-        }
-    }
-
-    renderizarProductos(productosFiltrados)
+        
+            renderizarProductos(productosFiltrados)
+        })
+    //   
 })
 
+// Boton para limpiar los filtros 
 limpiarFiltros.addEventListener('click', () => {
     hilos.checked = false
     cintas.checked = false
     agujas.checked = false
     
-    renderizarProductos(productos)
+    traerProductos()
 })
 
