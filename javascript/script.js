@@ -54,7 +54,7 @@ function renderizarProductos(products){
             <img src="${img}" alt="${altImg}">
             <p>${nombre}</p> 
             <p>$${precio}</p>
-            <input id="quantity${id}" class="input-quantity" type="number" value="1" min="1" max="${stock}">
+            <input id="quantity${id}" class="input-quantity  input-product-style" type="number" placeholder="${stock}" min="1" max="${stock}">
             <button onclick="agregarProducto(${id}, ${precio}, cantidadProducto(${id}))" class="button-catalogo">Añadir al Carrito</button>
         `
         //En el boton tengo el evento onclick que activa la funcion que agrega al carrito con dos parametros, producto id y cantidad producto
@@ -78,7 +78,13 @@ function cantidadProducto(id){
     let identificacion = "#quantity" + id
     let input = document.querySelector(identificacion)
     let quantity = Number(input.value)
-    return quantity
+    
+    if(quantity != 0){
+        return quantity
+    }else{
+        return 1
+    }
+    
 }
 
 //Funcion que agrega los items al carrito
@@ -89,18 +95,30 @@ function agregarProducto(id, precio, cantidad){
             const item = arrayProductos.find((producto) => producto.id === id)
             const validar = carrito.some((prod) => prod.id === id)
 
-            if(validar){
-                const prodCarrito = carrito.find((prod) => prod.id === id)
-                prodCarrito.cantidad = prodCarrito.cantidad + cantidad
-                //Calculo el precio cuando tengo el producto en el carrito
-                prodCarrito.precio = prodCarrito.precio + (precio * cantidad)
+            if(cantidad > item.stock){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Cantidad no disponible',
+                    text: `El stock disponible es de ${item.stock}`,
+                    color: '#596f91',
+                    background: '#EFEBE4',
+                    confirmButtonColor: '#918367d2'
+                })
             }else{
-                //Seteo cantidad y precio
-                item.cantidad = cantidad
-                item.precio = precio * cantidad
-            
-            carrito.push(item)
-        }
+                if(validar){
+                    const prodCarrito = carrito.find((prod) => prod.id === id)
+                    prodCarrito.cantidad = prodCarrito.cantidad + cantidad
+                    //Calculo el precio cuando tengo el producto en el carrito
+                    prodCarrito.precio = prodCarrito.precio + (precio * cantidad)
+                    restarStock(item, cantidad)
+                }else{
+                    //Seteo cantidad y precio
+                    item.cantidad = cantidad
+                    item.precio = precio * cantidad
+                    restarStock(item, cantidad)
+                    carrito.push(item)
+                }
+            }
 
         mostrarCarrito() 
     })

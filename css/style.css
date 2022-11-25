@@ -439,12 +439,16 @@ footer div .copyright {
   margin-top: 10px;
 }
 
-/* Buttons */
+/* Button agregar producto y input */
 .button-catalogo {
   color: #FFF7E8;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
   padding: 1px;
   margin: 3px 1px;
+}
+
+.input-product-style {
+  width: 3.2rem;
 }
 
 /* OJAL Y BOTON */
